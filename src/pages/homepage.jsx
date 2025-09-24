@@ -25,7 +25,7 @@ const HomePage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8086/api/admins")
+    fetch("http://localhost:9090/ems-0.0.1-SNAPSHOT/api/admins")
       .then((res) => res.json())
       .then((data) => console.log("Admin data:", data))
       .catch((err) => console.error(err));
@@ -77,11 +77,11 @@ const HomePage = () => {
 
     let url = "";
     if (credentials.role === "admin") {
-      url = "http://localhost:8086/api/admins/login";
+      url = "http://localhost:9090/ems-0.0.1-SNAPSHOT/api/admins/login";
     } else if (credentials.role === "employee") {
-      url = "http://localhost:8086/api/employees/login";
+      url = "http://localhost:9090/ems-0.0.1-SNAPSHOT/api/employees/login";
     } else if (credentials.role === "hr") {
-      url = "http://localhost:8086/api/hr/login";
+      url = "http://localhost:9090/ems-0.0.1-SNAPSHOT/api/hr/login";
     }
 
     try {
@@ -123,11 +123,11 @@ const HomePage = () => {
 
     let url = "";
     if (signupData.role === "admin") {
-      url = "http://localhost:8086/api/admins/create";
+      url = "http://localhost:9090/ems-0.0.1-SNAPSHOT/api/admins/create";
     } else if (signupData.role === "employee") {
-      url = "http://localhost:8086/api/employees/create";
+      url = "http://localhost:9090/ems-0.0.1-SNAPSHOT/api/employees/create";
     } else if (signupData.role === "hr") {
-      url = "http://localhost:8086/api/hr/create";
+      url = "http://localhost:9090/ems-0.0.1-SNAPSHOT/api/hr/create";
     }
 
     try {

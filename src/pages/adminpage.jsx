@@ -76,22 +76,22 @@ const AdminDashboard = () => {
   }, []);
 
   const fetchEmployees = async () => {
-    const res = await fetch("http://localhost:  /api/employees");
+    const res = await fetch("http://localhost:9090/ems-0.0.1-SNAPSHOT/api/employees");
     const data = await res.json();
     setEmployees(data);
   };
 
   const fetchHrAccounts = async () => {
-    const res = await fetch("http://localhost:8086/api/hr/accounts");
+    const res = await fetch("http://localhost:9090/ems-0.0.1-SNAPSHOT/api/hr/accounts");
     const data = await res.json();
     setHrAccounts(data);
   };
 
   const fetchSignupRequests = async () => {
-    const empRes = await fetch("http://localhost:8086/api/employees/pending");
+    const empRes = await fetch("http://localhost:9090/ems-0.0.1-SNAPSHOT/api/employees/pending");
     const empData = await empRes.json();
 
-    const hrRes = await fetch("http://localhost:8086/api/hr/pending");
+    const hrRes = await fetch("http://localhost:9090/ems-0.0.1-SNAPSHOT/api/hr/pending");
     const hrData = await hrRes.json();
 
     const combined = [
@@ -159,14 +159,14 @@ const AdminDashboard = () => {
   // Add employee
   const handleAddEmployee = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:8086/api/employees/create", {
+    const response = await fetch("http://localhost:9090/ems-0.0.1-SNAPSHOT/api/employees/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newEmployee),
     });
     if (response.ok) {
       const data = await response.json();
-      await fetch(`http://localhost:8086/api/employees/approve/${data.id}`, { method: "POST" });
+      await fetch(`http://localhost:9090/ems-0.0.1-SNAPSHOT/api/employees/approve/${data.id}`, { method: "POST" });
       fetchEmployees();
       fetchSignupRequests();
       setShowAddEmployee(false);
@@ -188,14 +188,14 @@ const AdminDashboard = () => {
   // Add HR
   const handleAddHr = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:8086/api/hr/create", {
+    const response = await fetch("http://localhost:9090/ems-0.0.1-SNAPSHOT/api/hr/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newHr),
     });
     if (response.ok) {
       const data = await response.json();
-      await fetch(`http://localhost:8086/api/hr/approve/${data.id}`, { method: "POST" });
+      await fetch(`http://localhost:9090/ems-0.0.1-SNAPSHOT/api/hr/approve/${data.id}`, { method: "POST" });
       fetchHrAccounts();
       fetchSignupRequests();
       setShowAddHr(false);
@@ -253,7 +253,7 @@ const AdminDashboard = () => {
   // Update employee
   const handleUpdateEmployee = async (e) => {
     e.preventDefault();
-    await fetch(`http://localhost:8086/api/employees/${editEmployee.id}`, {
+    await fetch(`http://localhost:9090/ems-0.0.1-SNAPSHOT/api/employees/${editEmployee.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editEmployee),
@@ -265,7 +265,7 @@ const AdminDashboard = () => {
   // Update HR
   const handleUpdateHr = async (e) => {
     e.preventDefault();
-    await fetch(`http://localhost:8086/api/hr/${editHr.id}`, {
+    await fetch(`http://localhost:9090/ems-0.0.1-SNAPSHOT/api/hr/${editHr.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editHr),
@@ -276,13 +276,13 @@ const AdminDashboard = () => {
 
   // Delete employee
   const handleDeleteEmployee = async (id) => {
-    await fetch(`http://localhost:8086/api/employees/${id}`, { method: "DELETE" });
+    await fetch(`http://localhost:9090/ems-0.0.1-SNAPSHOT/api/employees/${id}`, { method: "DELETE" });
     fetchEmployees();
   };
 
   // Delete HR
   const handleDeleteHr = async (id) => {
-    await fetch(`http://localhost:8086/api/hr/${id}`, { method: "DELETE" });
+    await fetch(`http://localhost:9090/ems-0.0.1-SNAPSHOT/api/hr/${id}`, { method: "DELETE" });
     fetchHrAccounts();
   };
 
@@ -290,9 +290,9 @@ const AdminDashboard = () => {
   const handleApproveRequest = async (request) => {
     let url = "";
     if (request.role === "employee") {
-      url = `http://localhost:8086/api/employees/approve/${request.id}`;
+      url = `http://localhost:9090/ems-0.0.1-SNAPSHOT/api/employees/approve/${request.id}`;
     } else {
-      url = `http://localhost:8086/api/hr/approve/${request.id}`;
+      url = `http://localhost:9090/ems-0.0.1-SNAPSHOT/api/hr/approve/${request.id}`;
     }
     await fetch(url, { method: "POST" });
     fetchSignupRequests();
@@ -304,9 +304,9 @@ const AdminDashboard = () => {
   const handleRejectRequest = async (request) => {
     let url = "";
     if (request.role === "employee") {
-      url = `http://localhost:8086/api/employees/reject/${request.id}`;
+      url = `http://localhost:9090/ems-0.0.1-SNAPSHOT/api/employees/reject/${request.id}`;
     } else {
-      url = `http://localhost:8086/api/hr/reject/${request.id}`;
+      url = `http://localhost:9090/ems-0.0.1-SNAPSHOT/api/hr/reject/${request.id}`;
     }
     await fetch(url, { method: "DELETE" });
     fetchSignupRequests();
