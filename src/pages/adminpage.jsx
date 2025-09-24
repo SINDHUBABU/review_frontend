@@ -76,7 +76,7 @@ const AdminDashboard = () => {
   }, []);
 
   const fetchEmployees = async () => {
-    const res = await fetch("http://localhost:8086/api/employees");
+    const res = await fetch("http://localhost:  /api/employees");
     const data = await res.json();
     setEmployees(data);
   };
